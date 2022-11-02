@@ -42,7 +42,6 @@ def build_questionnaire(filename):
  
      if wording or choices:
          questions.append([wording, choices])
-     print(questions)
      return questions
 
  
@@ -76,14 +75,30 @@ def questionaire(liste):
 def correctionSimple(reponses):
     score = 0
     for i in range(len(reponses)):
-        pass
-    pass
+        if((len(reponses[i][0])) == 1):
+            if reponses[i][1][reponses[i][0][0]]:
+                score += 1
+        else:
+            acc = 0
+            scoreTemp = 0
+            for j in range(len(reponses[i][0])):
+                if reponses[i][1][j][1]:
+                    scoreTemp += 1
+            for j in range(len(reponses[i][1])):
+                if reponses[i][i][j][1]:
+                    acc += 1
+            score += scoreTemp / acc
+    return score
+        
+
 if __name__ == '__main__':
      filename = "QCM.txt"
  
      # Chargement du questionnaire
      questions = build_questionnaire(filename)
-     print(questionaire(questions))
+     x = questionaire(questions)
+     print("score : " , correctionSimple(x))
+     
      
      print("Le questionnaire est une liste de questions.")
      for q in range(len(questions)):
